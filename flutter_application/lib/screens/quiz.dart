@@ -13,6 +13,7 @@ class _QuizState extends State<Quiz> {
   String? _selectedOption1;
   String? _selectedOption2;
   String? _shortAnswer;
+  bool isSubmited = false;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +115,15 @@ class _QuizState extends State<Quiz> {
             onPressed: () {
               if (_fomrKey.currentState!.validate()) {
                 _fomrKey.currentState!.save();
-                // manejar el envio de datos
+                setState(() {
+                  isSubmited = true;
+                });
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Quiz sent'),
+                  ),
+                );
               }
             },
             child: const Text('Enviar'),
